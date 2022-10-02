@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Homework5Try3.Models.books>
+
+<h2>Books</h2>
+<br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-4">
+                <input class="form-control mr-sm-2" id="searchtext" name="searchtext" type="search" placeholder="Search Book Name" aria-label="Search">
+            </div>
+            <div class="col-sm-2">
+                <select name="author" id="author" class="form-control"  style="width: 150px;">
+                    <option value="">Select Author</option>
+                @foreach (var item in Model)
+                {
+                    <option value="@item.author">@item.author</option>
+                }
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <select name="type" id="type" class="form-control" style="width: 150px;">
+                    <option value="">Select Type</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.type">@item.type</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" class="btn btn-success" value="Search" style="width: 150px;" />
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" id="clear" class="btn btn-danger" value="Clear" style="width: 150px;" />
+            </div>
+        </div>
+        <br />
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+           Author
+        </th>
+        <th>
+           Type
+        </th>
+        <th>
+           Page Count
+        </th>
+        <th>
+            Points
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pagecount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.point)
+            </td>
+            <td>
+                UNCERTAIN
+            </td>
+            <td>
+                @Html.ActionLink("View", "Index", "Borrowed", new { id = item.bookId, name = item.name }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+
+    $(document).ready(function () {
+        $("#clear").on("click", function () {
+            $("#searchtext").val("");
+            $("#author").val("");
+            $("#type").val("");
+        });
+    });
+</script>
+  

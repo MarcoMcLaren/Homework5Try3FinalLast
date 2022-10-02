@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Homework5Try3.Models.borrows>
+<br />
+<h1></h1>
+<h1>#@ViewBag.BookId  @ViewBag.BookName</h1>
+<h2 id="displayBorrowsAmount"></h2>
+@Html.ActionLink("Students", "Index", "Student", new { bookid = ViewBag.BookId, bookName = ViewBag.BookName}, new { @class = "btn btn-primary" })
+<br />
+<table class="table" id="tableID">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Taken Date
+        </th>
+        <th>
+            Brought Date
+        </th>
+        <th>
+            Borrowed By
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.borrowId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.takenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.broughtDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.student)
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    var rowCount = document.getElementById('tableID').rows.length;
+    console.log(rowCount);
+    document.getElementById("displayBorrowsAmount").innerHTML = "# Borrows - " + rowCount;
+</script>
